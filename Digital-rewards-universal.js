@@ -5,7 +5,9 @@ it('universal-3tl',function(){
     
     cy.viewport(1920, 1080) 
     
-    // username or email
+    function login(){
+
+        // username or email
     cy.get('#mat-input-0').type('rupali.goyal@knoldus.com')
     
     // password
@@ -14,33 +16,42 @@ it('universal-3tl',function(){
     //login button
     cy.get('.login-button').click()
     
-    // rewards button
-    cy.get('.mobile-container > :nth-child(3) > .ng-star-inserted').click()
-    cy.get('.mat-select-value').click()
+    }
+    login();
 
-    // for digital rewards
-    cy.get('#mat-option-7 > .mat-option-text').click()
+    function rewards()
+    {
+        // rewards button
+        cy.get('.mobile-container > :nth-child(3) > .ng-star-inserted').click()
+        cy.get('.mat-select-value').click()
+    }
+    rewards();
 
-    //Gosford Parknp
-    cy.get(':nth-child(1) > .mat-card-actions > .ng-star-inserted > .btn').click()
-    cy.get('.col > .btn').click()
+    function digital(){
+        // for digital rewards
+        cy.get('#mat-option-7 > .mat-option-text').click()
+    }
+    digital();
 
-    cy.get('.breadcrumb > :nth-child(1) > a').click()
-  
+    function digitalrewards()
+    {
+        // for gosford park
+        cy.get(':nth-child(1) > .mat-card-actions > .ng-star-inserted > .btn').click()
+        cy.get('.col > .btn').click()
+       // assertion
+        cy.get('.earn-preview-heading').should('contain','Gosford Park')
+        
 
-   cy.get('.mat-select-value').click()
-    cy.get('#mat-option-15 > .mat-option-text').click()
+    }
+    digitalrewards();
+    function pointhistory()
+    {
+        cy.visit('https://universal.3tlstaging.com/manage-account/point-history')
+        // assertion
+        cy.get(':nth-child(3) > .cdk-column-description').should('contain',"You redeemed points for 'Gosford Park'")
+    }
+pointhistory();
     
-    // Endless Love (2014)
-    cy.get(':nth-child(2) > .mat-card-actions > .ng-star-inserted > .btn').click()
-    cy.get('.earn-preview-heading').should('contain','Endless Love (2014)')
-
-    cy.get('.col > .btn').click()
-
-
-
-
-
     
-   
+    
 });
